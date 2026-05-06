@@ -1,9 +1,9 @@
 <?php
 require_once 'config/koneksi.php';
 
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$id    = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $error = '';
-$data = null;
+$data  = null;
 
 if (!$id) {
     $error = 'ID data absensi tidak valid.';
@@ -12,7 +12,7 @@ if (!$id) {
     $stmt->bind_param('i', $id);
 
     if ($stmt->execute()) {
-        header('Location: index.php');
+        header('Location: index.php?msg=' . urlencode('Data absensi berhasil dihapus'));
         exit();
     }
 
@@ -41,36 +41,35 @@ if (!$id) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hapus Data Absensi</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .confirmation-text {
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--text-main);
-            font-size: 16px;
-        }
-        .detail-table {
-            margin: 0 auto 24px auto;
-            max-width: 500px;
-        }
-        .detail-table th {
-            width: 30%;
-            background-color: var(--bg-color);
-        }
-    </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container card-shake">
+
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="index.php">Beranda</a>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <span>Hapus Data</span>
+        </div>
+
         <h2>Hapus Data Absensi</h2>
 
         <?php if ($error): ?>
             <div class="error-msg"><?= htmlspecialchars($error); ?></div>
-            <div class="form-actions" style="max-width: 500px; margin: 0 auto;">
-                <a href="index.php" style="flex:1; display:flex;">
-                    <button type="button" class="btn btn-secondary" style="width:100%;">Kembali</button>
+            <div class="form-actions form-actions-centered">
+                <a href="index.php" class="btn-cancel-link">
+                    <button type="button" class="btn btn-secondary">Kembali</button>
                 </a>
             </div>
+
         <?php elseif ($data): ?>
-            <p class="confirmation-text">Apakah Anda yakin ingin menghapus data absensi berikut?</p>
+            <p class="confirmation-text">
+                Apakah Anda yakin ingin menghapus data absensi berikut?
+            </p>
 
             <table class="detail-table">
                 <tr>
@@ -93,9 +92,11 @@ if (!$id) {
 
             <form action="hapus.php?id=<?= $id; ?>" method="POST">
                 <div class="form-actions">
-                    <button type="submit" name="hapus" class="btn btn-danger">Ya, Hapus</button>
-                    <a href="index.php" style="flex:1; display:flex;">
-                        <button type="button" class="btn btn-secondary" style="width:100%;">Batal</button>
+                    <button type="submit" name="hapus" class="btn btn-danger">
+                        Ya, Hapus
+                    </button>
+                    <a href="index.php" class="btn-cancel-link">
+                        <button type="button" class="btn btn-secondary">Batal</button>
                     </a>
                 </div>
             </form>
