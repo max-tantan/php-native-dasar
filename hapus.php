@@ -38,46 +38,68 @@ if (!$id) {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hapus Data Absensi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .confirmation-text {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            font-size: 16px;
+        }
+        .detail-table {
+            margin: 0 auto 24px auto;
+            max-width: 500px;
+        }
+        .detail-table th {
+            width: 30%;
+            background-color: var(--bg-color);
+        }
+    </style>
 </head>
 <body>
-    <h2>Hapus Data Absensi</h2>
+    <div class="container">
+        <h2>Hapus Data Absensi</h2>
 
-    <?php if ($error): ?>
-        <p><?= htmlspecialchars($error); ?></p>
-        <a href="index.php">
-            <button type="button">Kembali</button>
-        </a>
-    <?php elseif ($data): ?>
-        <p>Apakah Anda yakin ingin menghapus data absensi berikut?</p>
+        <?php if ($error): ?>
+            <div class="error-msg"><?= htmlspecialchars($error); ?></div>
+            <div class="form-actions" style="max-width: 500px; margin: 0 auto;">
+                <a href="index.php" style="flex:1; display:flex;">
+                    <button type="button" class="btn btn-secondary" style="width:100%;">Kembali</button>
+                </a>
+            </div>
+        <?php elseif ($data): ?>
+            <p class="confirmation-text">Apakah Anda yakin ingin menghapus data absensi berikut?</p>
 
-        <table border="1" cellpadding="10" cellspacing="0">
-            <tr>
-                <th>Nama Siswa</th>
-                <td><?= htmlspecialchars($data['nama_siswa']); ?></td>
-            </tr>
-            <tr>
-                <th>Kelas</th>
-                <td><?= htmlspecialchars($data['kelas']); ?></td>
-            </tr>
-            <tr>
-                <th>Tanggal</th>
-                <td><?= htmlspecialchars($data['tanggal']); ?></td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td><?= htmlspecialchars($data['status']); ?></td>
-            </tr>
-        </table>
+            <table class="detail-table">
+                <tr>
+                    <th>Nama Siswa</th>
+                    <td><?= htmlspecialchars($data['nama_siswa']); ?></td>
+                </tr>
+                <tr>
+                    <th>Kelas</th>
+                    <td><?= htmlspecialchars($data['kelas']); ?></td>
+                </tr>
+                <tr>
+                    <th>Tanggal</th>
+                    <td><?= htmlspecialchars($data['tanggal']); ?></td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td><?= htmlspecialchars($data['status']); ?></td>
+                </tr>
+            </table>
 
-        <br>
-
-        <form action="hapus.php?id=<?= $id; ?>" method="POST">
-            <button type="submit" name="hapus">Ya, Hapus</button>
-            <a href="index.php">
-                <button type="button">Batal</button>
-            </a>
-        </form>
-    <?php endif; ?>
+            <form action="hapus.php?id=<?= $id; ?>" method="POST">
+                <div class="form-actions">
+                    <button type="submit" name="hapus" class="btn btn-danger">Ya, Hapus</button>
+                    <a href="index.php" style="flex:1; display:flex;">
+                        <button type="button" class="btn btn-secondary" style="width:100%;">Batal</button>
+                    </a>
+                </div>
+            </form>
+        <?php endif; ?>
+    </div>
 </body>
 </html>
