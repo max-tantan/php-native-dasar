@@ -54,44 +54,60 @@ if (!$id) {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Data Absensi</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Edit Absensi Siswa</h2>
+    <div class="container">
+        <h2>Edit Absensi Siswa</h2>
 
-    <?php if ($error): ?>
-        <p><?= htmlspecialchars($error); ?></p>
-    <?php endif; ?>
+        <?php if ($error): ?>
+            <div class="error-msg"><?= htmlspecialchars($error); ?></div>
+        <?php endif; ?>
 
-    <?php if ($data): ?>
-        <form action="edit.php?id=<?= $id; ?>" method="POST">
-            <label>Nama Siswa:</label><br>
-            <input type="text" name="nama_siswa" value="<?= htmlspecialchars($data['nama_siswa']); ?>" required><br><br>
+        <?php if ($data): ?>
+            <form action="edit.php?id=<?= $id; ?>" method="POST">
+                <div class="form-group">
+                    <label>Nama Siswa</label>
+                    <input type="text" name="nama_siswa" value="<?= htmlspecialchars($data['nama_siswa']); ?>" required>
+                </div>
 
-            <label>Kelas:</label><br>
-            <input type="text" name="kelas" value="<?= htmlspecialchars($data['kelas']); ?>" required><br><br>
+                <div class="form-group">
+                    <label>Kelas</label>
+                    <input type="text" name="kelas" value="<?= htmlspecialchars($data['kelas']); ?>" required>
+                </div>
 
-            <label>Tanggal:</label><br>
-            <input type="date" name="tanggal" value="<?= htmlspecialchars($data['tanggal']); ?>" required><br><br>
+                <div class="form-group">
+                    <label>Tanggal</label>
+                    <input type="date" name="tanggal" value="<?= htmlspecialchars($data['tanggal']); ?>" required>
+                </div>
 
-            <label>Status:</label><br>
-            <select name="status" required>
-                <?php foreach ($status_options as $option): ?>
-                    <option value="<?= $option; ?>" <?= $data['status'] === $option ? 'selected' : ''; ?>>
-                        <?= $option; ?>
-                    </option>
-                <?php endforeach; ?>
-            </select><br><br>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select name="status" required>
+                        <?php foreach ($status_options as $option): ?>
+                            <option value="<?= $option; ?>" <?= $data['status'] === $option ? 'selected' : ''; ?>>
+                                <?= $option; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
 
-            <button type="submit" name="submit">Update Data</button>
-            <a href="index.php">
-                <button type="button">Batal</button>
-            </a>
-        </form>
-    <?php else: ?>
-        <a href="index.php">
-            <button type="button">Kembali</button>
-        </a>
-    <?php endif; ?>
+                <div class="form-actions">
+                    <button type="submit" name="submit" class="btn">Update Data</button>
+                    <a href="index.php" style="flex:1; display:flex;">
+                        <button type="button" class="btn btn-secondary" style="width:100%;">Batal</button>
+                    </a>
+                </div>
+            </form>
+        <?php else: ?>
+            <div class="form-actions">
+                <a href="index.php" style="flex:1; display:flex;">
+                    <button type="button" class="btn btn-secondary" style="width:100%;">Kembali</button>
+                </a>
+            </div>
+        <?php endif; ?>
+    </div>
 </body>
 </html>

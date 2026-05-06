@@ -21,33 +21,47 @@ require_once 'config/koneksi.php';
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Data Absensi</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Tambah Absensi Siswa</h2>
-    
-    <form action="" method="POST">
-        <label>Nama Siswa:</label><br>
-        <input type="text" name="nama_siswa" required><br><br>
+    <div class="container">
+        <h2>Tambah Absensi Siswa</h2>
+        
+        <form action="" method="POST">
+            <div class="form-group">
+                <label>Nama Siswa</label>
+                <input type="text" name="nama_siswa" required>
+            </div>
 
-        <label>Kelas:</label><br>
-        <input type="text" name="kelas" required><br><br>
+            <div class="form-group">
+                <label>Kelas</label>
+                <input type="text" name="kelas" required>
+            </div>
 
-        <label>Tanggal:</label><br>
-        <input type="date" name="tanggal" required><br><br>
+            <div class="form-group">
+                <label>Tanggal</label>
+                <input type="date" name="tanggal" required>
+            </div>
 
-        <label>Status:</label><br>
-        <select name="status" required>
-            <option value="Hadir">Hadir</option>
-            <option value="Izin">Izin</option>
-            <option value="Sakit">Sakit</option>
-            <option value="Alpa">Alpa</option>
-        </select><br><br>
+            <div class="form-group">
+                <label>Status</label>
+                <select name="status" required>
+                    <option value="Hadir">Hadir</option>
+                    <option value="Izin">Izin</option>
+                    <option value="Sakit">Sakit</option>
+                    <option value="Alpa">Alpa</option>
+                </select>
+            </div>
 
-        <button type="submit" name="submit">Simpan Data</button>
-        <a href="index.php">
-            <button type="button">Batal</button>
-        </a>
-    </form>
+            <div class="form-actions">
+                <button type="submit" name="submit" class="btn">Simpan Data</button>
+                <a href="index.php" style="flex:1; display:flex;">
+                    <button type="button" class="btn btn-secondary" style="width:100%;">Batal</button>
+                </a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
