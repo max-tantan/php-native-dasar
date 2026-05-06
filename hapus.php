@@ -43,7 +43,7 @@ if (!$id) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container card-shake">
+    <div class="container">
 
         <!-- Breadcrumb -->
         <div class="breadcrumb">
